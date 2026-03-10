@@ -10,6 +10,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('blogs.')
         ->group(function () {
             Route::livewire('/', 'modules::blog.pages.index')->name('index');
+            Route::livewire('/create', 'modules::blog.pages.create')->name('create');
+            Route::livewire('/{post}/edit', 'modules::blog.pages.edit')->name('edit');
         });
 });
 require __DIR__ . '/settings.php';
