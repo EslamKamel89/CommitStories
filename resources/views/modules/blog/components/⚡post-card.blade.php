@@ -25,17 +25,20 @@ new class extends Component {
         </h2>
 
         <div class="flex items-center gap-2 shrink-0">
+            @can('update' , $post)
             <flux:button
                 icon="pencil"
                 wire:navigate
                 href="{{ route('blogs.edit' , $post->id) }}"
                 class="bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 rounded-lg px-3 py-2 transition" />
-
+            @endcan
+            @can('delete' , $post)
             <flux:button
                 icon="trash"
                 wire:click="delete"
                 wire:confirm="Are you sure you want to delete this post"
                 class="bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-900/30 dark:hover:bg-red-900/50 dark:text-red-400 rounded-lg px-3 py-2 transition" />
+            @endcan
         </div>
     </div>
 

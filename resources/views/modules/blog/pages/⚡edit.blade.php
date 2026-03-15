@@ -7,6 +7,7 @@ use App\Modules\Blog\Models\Category;
 use App\Modules\Blog\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -34,6 +35,7 @@ new class extends Component {
     }
 
     public function mount() {
+        Gate::authorize('update', $this->post);
         $this->title = $this->post->title;
         $this->category_id = $this->post->category_id;
         $this->content = $this->post->content;
