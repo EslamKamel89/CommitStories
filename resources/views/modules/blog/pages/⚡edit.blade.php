@@ -28,9 +28,8 @@ new class extends Component {
 
     public function save() {
         $data = $this->validate();
-        $data['published_at'] = $this->post->published_at ?? ($this->is_published  ?  Carbon::now() : null);
         app(UpdatePost::class,)
-            ->execute($this->post, PostData::fromArray($data, auth()->user()->id));
+            ->execute($this->post, PostData::fromUpdateRequest($data, $this->post->published_at));
         return redirect()->route('blogs.index');
     }
 
