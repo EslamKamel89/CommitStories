@@ -12,7 +12,7 @@ class DeletePost {
     ) {
     }
     public function execute(Post $post) {
-        // Gate::authorize('delete' , $post);
+        Gate::authorize('delete', $post);
         return $this->service->delete($post);
     }
 }

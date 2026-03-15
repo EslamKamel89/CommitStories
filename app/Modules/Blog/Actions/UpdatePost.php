@@ -14,7 +14,7 @@ class UpdatePost {
     }
 
     public function execute(Post $post,  PostData $dto) {
-        // Gate::authorize('update' , $post);
+        Gate::authorize('update', $post);
         return $this->service->update($post, $dto);
     }
 }

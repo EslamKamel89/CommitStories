@@ -13,7 +13,7 @@ class CreatePost {
     ) {
     }
     public function execute(PostData $dto) {
-        // Gate::authorize('create', Post::class);
+        Gate::authorize('create', Post::class);
         return $this->service->create($dto);
     }
 }
