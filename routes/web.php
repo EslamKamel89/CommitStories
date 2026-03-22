@@ -10,8 +10,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('blogs.')
         ->group(function () {
             Route::livewire('/', 'modules::blog.pages.index')->name('index');
-            Route::livewire('/create', 'modules::blog.pages.create')->name('create');
-            Route::livewire('/{post}/edit', 'modules::blog.pages.edit')->name('edit');
+            Route::livewire('/create', 'modules::blog.pages.create')->name('create')
+                ->middleware(['limit_post_creation']);
+            Route::livewire('/{post}/edit', 'modules::blog.pages.edit')->name('edit')
+                ->middleware(['ensure_post_owner']);
         });
 });
 require __DIR__ . '/settings.php';
