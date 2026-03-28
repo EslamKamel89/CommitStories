@@ -4,6 +4,7 @@ namespace App\Modules\Blog\Actions;
 
 use App\Modules\Blog\Domain\PostService;
 use App\Modules\Blog\DTOs\PostData;
+use App\Modules\Blog\Jobs\ProcessPostCreated;
 use App\Modules\Blog\Models\Post;
 use Illuminate\Support\Facades\Gate;
 
@@ -14,6 +15,8 @@ class CreatePost {
     }
     public function execute(PostData $dto) {
         Gate::authorize('create', Post::class);
-        return $this->service->create($dto);
+        $post =  $this->service->create($dto);
+        ProcessPostCreated::dispatch($post);
+        return $post;
     }
 }
